@@ -1,0 +1,27 @@
+{
+  "name": "blogaggregator",
+  "version": "1.0.0",
+  "description": "Boot.dev guided project: Build a Blog Aggregator in TypeScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsx ./src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeffschoe/blogaggregator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/jeffschoe/blogaggregator/issues"
+  },
+  "homepage": "https://github.com/jeffschoe/blogaggregator#readme",
+  "devDependencies": {
+    "@types/node": "^24.10.0",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,2 @@
+# This allows you to simply type nvm use in your CLI while in the root of your project to activate the correct version of node
+22.15.0
