@@ -1,3 +1,4 @@
+//config.ts
 // This is where we'll handle reading and writing the JSON file.
 import fs from "fs"; //file system module, which allows you to read and write files.
 import os from "os"; //provides operating system-related utility methods.

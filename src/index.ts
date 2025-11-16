@@ -1,3 +1,4 @@
+//index.ts
 import { 
   CommandsRegistry,
   registerCommand,
