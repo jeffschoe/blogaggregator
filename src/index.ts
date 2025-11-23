@@ -4,9 +4,9 @@ import {
   registerCommand,
   runCommand 
 } from "./commands/commands";
-import { handlerLogin } from "./commands/users";
+import { handlerLogin, handlerRegister } from "./commands/users";
 
-function main() {
+async function main() {
   
 
   const args = process.argv.slice(2);
@@ -21,14 +21,16 @@ function main() {
   const commandsRegistry: CommandsRegistry = {};
 
   registerCommand(commandsRegistry, "login", handlerLogin)
+  registerCommand(commandsRegistry, "register", handlerRegister)
 
   try{
-    runCommand(commandsRegistry, cmdName, ...cmdArgs);
+    await runCommand(commandsRegistry, cmdName, ...cmdArgs);
   } catch (err: unknown) {
     console.error(err instanceof Error ? err.message : String(err));
     process.exit(1);
   }
 
+  process.exit(0);
 }
 
 main();
