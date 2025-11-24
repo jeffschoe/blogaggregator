@@ -2,7 +2,6 @@
 import { db } from "..";
 import { users } from "../schema";
 import { eq } from "drizzle-orm";
-import type { InferSelectModel } from "drizzle-orm";
 import { firstOrUndefined } from "./utils";
 
 export async function createUser(name: string) {
@@ -13,4 +12,8 @@ export async function createUser(name: string) {
 export async function getUser(name: string) {
     const result = await db.select().from(users).where(eq(users.name, name));
     return firstOrUndefined(result);
+}
+
+export async function deleteUsers() {
+    await db.delete(users);
 }

@@ -27,7 +27,5 @@ export async function handlerRegister(cmdName: string, ...args: string[]): Promi
         console.log(user);
     } catch (error) {
         throw new Error(`error: user '${userName}' already exists or another database issue occurred.`);
-  }
-
-
+    }
 }

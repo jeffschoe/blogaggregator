@@ -1,6 +1,7 @@
 //commands.ts
 export type CommandHandler = (
-    cmdName: string, ...args: string[]
+    cmdName: string, 
+    ...args: string[]
 ) => Promise<void>;
 
 export type CommandsRegistry = Record<string, CommandHandler>;
