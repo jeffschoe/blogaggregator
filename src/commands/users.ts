@@ -1,6 +1,6 @@
 //users.ts
-import { setUser } from "../config";
-import { createUser, getUser } from "../lib/db/queries/users";
+import { readConfig, setUser } from "../config";
+import { createUser, getUser, getUsers } from "../lib/db/queries/users";
 
 export async function handlerLogin(cmdName: string, ...args: string[]): Promise<void> {
     if (args.length !== 1) throw new Error(`usage: ${cmdName} <name>`);
@@ -28,4 +28,19 @@ export async function handlerRegister(cmdName: string, ...args: string[]): Promi
     } catch (error) {
         throw new Error(`error: user '${userName}' already exists or another database issue occurred.`);
     }
+}
+
+export async function handlerListUsers(_cmdName: string, ..._args: string[]): Promise<void> {
+    
+    const currentUserName = readConfig().currentUserName;
+    const users = await getUsers();
+
+    for (const user of users) {
+        if (user.name === currentUserName) {
+            console.log(`* ${user.name} (current)`);
+        } else {
+            console.log(`* ${user.name}`);
+        }
+    }
+ 
 }
