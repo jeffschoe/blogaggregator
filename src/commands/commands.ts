@@ -6,6 +6,8 @@ export type CommandHandler = (
 
 export type CommandsRegistry = Record<string, CommandHandler>;
 
+// called from the main index.ts to register our commands and 
+// store them in the registry
 export function registerCommand( 
     registry: CommandsRegistry, 
     cmdName: string, 
