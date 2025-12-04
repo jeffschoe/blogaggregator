@@ -1,7 +1,7 @@
 //commands/addfeed.ts
 import { readConfig } from "../config";
-import { createFeed } from "../lib/db/queries/feeds";
-import { getUser } from "../lib/db/queries/users";
+import { createFeed, getFeeds } from "../lib/db/queries/feeds";
+import { getUser, getUserById } from "../lib/db/queries/users";
 import { Feed, User } from "../lib/db/schema";
 
 
@@ -36,5 +36,31 @@ function printFeed(feed: Feed, user: User) {
   console.log(`* Name:          ${feed.name}`);
   console.log(`* URL:           ${feed.url}`);
   console.log(`* User:          ${user.name}`);
+}
+
+export async function handlerListFeeds(cmdName: string, ...args: string[]): Promise<void> {
+    if (args.length !== 0) {
+      throw new Error(`usage: ${cmdName}\nno additional args allowed`);
+    } 
+
+    const feeds = await getFeeds();
+
+    if (feeds.length === 0) {
+      console.log(`No feeds found.`);
+      return;
+    }
+
+    console.log(`Found ${feeds.length} feeds:\n`);
+
+    for (let feed of feeds) {
+      const user = await getUserById(feed.userId);
+      if (!user) {
+        throw new Error(`Failed to find user for feed ${feed.id}`);
+      }
+
+      printFeed(feed, user);
+      console.log(`=====================================`);
+    }
+    
 }
 
