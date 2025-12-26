@@ -15,6 +15,13 @@
       "when": 1764559097461,
       "tag": "0001_daily_lester",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1764907669967,
+      "tag": "0002_wealthy_azazel",
+      "breakpoints": true
     }
   ]
 }

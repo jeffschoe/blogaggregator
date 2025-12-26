@@ -6,7 +6,12 @@ export async function handlerLogin(cmdName: string, ...args: string[]): Promise<
     if (args.length !== 1) throw new Error(`usage: ${cmdName} <name>`);
 
     const userName = args[0];
-    setUser(userName);
+    const existingUser = await getUser(userName);
+    if (!existingUser) {
+        throw new Error(`User ${userName} not found`);
+    }
+
+    setUser(existingUser.name);
     console.log(`switched to user '${userName}' successfully!`);
 }
 

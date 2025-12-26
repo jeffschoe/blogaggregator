@@ -1,8 +1,8 @@
 //feeds.ts
 import { db } from "..";
-import { feeds, users } from "../schema";
-import { firstOrUndefined } from "./utils";
 import { eq } from "drizzle-orm";
+import { feeds } from "../schema";
+import { firstOrUndefined } from "./utils";
 
 
 export async function createFeed(feedName: string, url: string, userId: string) {
@@ -23,4 +23,12 @@ export async function getFeeds() {
     .from(feeds);
     
     return result;
+}
+
+export async function getFeedByUrl(url: string) {
+    const result = await db.select()
+    .from(feeds)
+    .where(eq(feeds.url, url));
+
+    return firstOrUndefined(result);
 }
