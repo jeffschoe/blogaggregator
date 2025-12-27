@@ -10,15 +10,6 @@ export async function handlerFollow(cmdName: string, user: User, ...args: string
       throw new Error(`usage: ${cmdName} <feed_url>`);
     } 
 
-    /*
-    const config = readConfig();
-    const user = await getUser(config.currentUserName);
-    
-    if (!user) {
-        throw new Error(`User '${config.currentUserName}' not found`);
-    }
-    */
-
     const feedURL = args[0];
     const feed = await getFeedByUrl(feedURL);
 
@@ -33,15 +24,6 @@ export async function handlerFollow(cmdName: string, user: User, ...args: string
 }
 
 export async function handlerListFeedFollows(_cmdName: string, user: User, ..._args: string[]): Promise<void> {
-
-  /*
-    const config = readConfig();
-    const user = await getUser(config.currentUserName);
-    
-    if (!user) {
-      throw new Error(`User '${config.currentUserName}' not found`);
-    }
-    */
 
     const feedFollows = await getFeedFollowsForUser(user.id);
 

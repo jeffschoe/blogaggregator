@@ -23,5 +23,3 @@ export function middlewareLoggedIn(handler: UserCommandHandler): CommandHandler 
     await handler(cmdName, user, ...args);
   };
 }
-
-type middlewareLoggedIn = (handler: UserCommandHandler) => CommandHandler;

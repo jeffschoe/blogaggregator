@@ -11,15 +11,6 @@ export async function handlerAddFeed(cmdName: string, user: User, ...args: strin
       throw new Error(`usage: ${cmdName} <feed_name> <url>`);
     } 
 
-    /*
-    const config = readConfig();
-    const user = await getUser(config.currentUserName);
-    
-    if (!user) {
-      throw new Error(`User '${config.currentUserName}' not found`);
-    }
-    */
-
     const [feedName, url] = args;
 
     const feed = await createFeed(feedName, url, user.id);
