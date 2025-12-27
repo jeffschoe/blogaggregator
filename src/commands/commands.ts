@@ -1,4 +1,6 @@
 //commands.ts
+import type { User } from "../lib/db/schema" 
+
 export type CommandHandler = (
     cmdName: string, 
     ...args: string[]
@@ -28,3 +30,9 @@ export async function runCommand(
     
     await handler(cmdName, ...args);
 };
+
+export type UserCommandHandler = (
+  cmdName: string,
+  user: User,
+  ...args: string[]
+) => Promise<void>;

@@ -1,23 +1,24 @@
 //commands/addfeed.ts
-import { readConfig } from "../config";
 import { createFeed, getFeeds } from "../lib/db/queries/feeds";
-import { getUser, getUserById } from "../lib/db/queries/users";
+import { getUserById } from "../lib/db/queries/users";
 import { Feed, User } from "../lib/db/schema";
 import { createFeedFollow } from "../lib/db/queries/feed-follows";
 import { printFeedFollow } from "./feed-follows";
 
 
-export async function handlerAddFeed(cmdName: string, ...args: string[]): Promise<void> {
+export async function handlerAddFeed(cmdName: string, user: User, ...args: string[]): Promise<void> {
     if (args.length !== 2) {
       throw new Error(`usage: ${cmdName} <feed_name> <url>`);
     } 
 
+    /*
     const config = readConfig();
     const user = await getUser(config.currentUserName);
     
     if (!user) {
       throw new Error(`User '${config.currentUserName}' not found`);
     }
+    */
 
     const [feedName, url] = args;
 
