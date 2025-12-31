@@ -24,7 +24,8 @@ export const feeds = pgTable("feeds", {
     url: text("url").notNull().unique(),
     userId: uuid("user_id")
         .notNull()
-        .references(() => users.id, { onDelete: "cascade" }),  
+        .references(() => users.id, { onDelete: "cascade" }),
+    lastFetchedAt: timestamp("last_fetched_at"),  
 });
 
 export type Feed = typeof feeds.$inferSelect;
@@ -46,6 +47,5 @@ export const feedFollows = pgTable("feed_follows", {
 (t) => ({ unq: unique("feed_follows_user_id_feed_id_unique")
     .on(t.userId, t.feedId),
 }));
-
 
 export type FeedFollow = typeof feedFollows.$inferSelect;
