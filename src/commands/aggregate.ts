@@ -1,17 +1,12 @@
 //aggregate.ts
 import { getNextFeedToFetch, markFeedFetched } from "../lib/db/queries/feeds";
 import { fetchFeed } from "../lib/rss";
-import { Feed } from "../lib/db/schema"
+import { Feed, NewPost } from "../lib/db/schema"
 import { parseDuration } from "../lib/time";
+import { createPost } from "../lib/db/queries/posts";
 
 
 export async function handlerAgg(cmdName: string, ...args: string[]): Promise<void> {
-    /**
-     * const feedURL = "https://www.wagslane.dev/index.xml";
-     * const feedData = await fetchFeed(feedURL);
-     * const feedDataStr = JSON.stringify(feedData, null, 2);
-     * console.log(feedDataStr);
-     */
 
     if (args.length !== 1) {
         throw new Error(`usage: ${cmdName} <time_between_reqs>`);
@@ -65,13 +60,33 @@ async function scrapeFeed(feed: Feed) {
     );
     console.log(`================================================`);
     
+    let duplicateCount = 0;
+    
     for (const item of feedData.channel.item) {
-        console.log(item.title);
+
+        const publishedAt = new Date(item.pubDate);
+
+        const newPost = await createPost({
+            url: item.link,
+            feedId: feed.id,
+            title: item.title,
+            description: item.description,
+            publishedAt
+        } satisfies NewPost);
+
+        
+        if (!newPost) { // duplicate post
+          duplicateCount++;
+          // optional logging: console.log(`Skipping duplicate post: ${item.title}`)
+        }
     }
+
+    console.log(`Duplicate posts skipped: ${duplicateCount}`)
+    
 }
 
 function handleError(err: unknown) {
     console.error(
-        `Error scraping feeds: ${err instanceof Error ? err.message : err}`
-    )
+        console.error("Error scraping feeds:", err)
+      )
 }

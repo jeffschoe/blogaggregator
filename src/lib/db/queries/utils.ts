@@ -5,3 +5,7 @@ export function firstOrUndefined<T>(items: T[]) {
   }
   return items[0];
 }
+
+export function printGatorLineBreak() {
+  console.log(`🐊===========================🐊`);
+}

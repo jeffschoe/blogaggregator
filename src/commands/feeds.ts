@@ -4,6 +4,7 @@ import { getUserById } from "../lib/db/queries/users";
 import { Feed, User } from "../lib/db/schema";
 import { createFeedFollow } from "../lib/db/queries/feed-follows";
 import { printFeedFollow } from "./feed-follows";
+import { printGatorLineBreak } from "src/lib/db/queries/utils";
 
 
 export async function handlerAddFeed(cmdName: string, user: User, ...args: string[]): Promise<void> {
@@ -33,6 +34,7 @@ function printFeed(feed: Feed, user: User) {
   console.log(`* Name:          ${feed.name}`);
   console.log(`* URL:           ${feed.url}`);
   console.log(`* User:          ${user.name}`);
+  printGatorLineBreak();
 }
 
 export async function handlerListFeeds(cmdName: string, ...args: string[]): Promise<void> {

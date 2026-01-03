@@ -8,8 +8,6 @@ export type CommandHandler = (
 
 export type CommandsRegistry = Record<string, CommandHandler>;
 
-// called from the main index.ts to register our commands and 
-// store them in the registry
 export function registerCommand( 
     registry: CommandsRegistry, 
     cmdName: string, 
@@ -26,7 +24,7 @@ export async function runCommand(
 ): Promise<void> {
     // runs a given command with the provided state if it exists
     const handler = registry[cmdName];
-    if (!handler) throw new Error(`command <${cmdName}> is unknown and has not been registered yet`);
+    if (!handler) throw new Error(`command <${cmdName}> is invalid or has not been registered yet`);
     
     await handler(cmdName, ...args);
 };
