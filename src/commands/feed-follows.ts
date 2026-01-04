@@ -11,7 +11,7 @@ import { User } from "../lib/db/schema";
 export async function handlerFollow(cmdName: string, user: User, ...args: string[]): Promise<void> {
 
     if (args.length !== 1) {
-      throw new Error(`usage: ${cmdName} <feed_url>`);
+      throw new Error(`usage: ${cmdName} <url>`);
     } 
 
     const feedURL = args[0];
