@@ -42,7 +42,7 @@ Make sure you have these installed:
 
 - Node.js v22+ (developed and tested on v22.20.0)
 - npm (comes with Node.js)
-- PostgreSQL 18+ (developed and tested on 18.1)
+- PostgreSQL 16+ (developed and tested on 16.11)
 
 ### Installation
 
