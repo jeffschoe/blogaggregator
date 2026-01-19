@@ -34,7 +34,7 @@ export async function handlerListFeedFollows(_cmdName: string, user: User, ..._a
       return;
     }
 
-    console.log(`Feed follows for user %s:`, user.id);
+    console.log(`Feed follows for user %s:`, user.name);
     for (let ff of feedFollows) {
       console.log(`* %s`, ff.feedName);
     }
